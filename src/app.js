@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./Components/NavigationMenu";
 import SearchBox from "./Components/SearchBox";
-import MovieRow from "./Components/MovieRow";
+import MovieRows from "./Components/MovieRows"; // New Component
 import MovieDetailsModal from "./Components/MovieDetailsModal";
 import StreamList from "./Components/StreamList";
 import Movies from "./Components/Movies";
 import Cart from "./Components/Cart";
 import About from "./Components/About";
 import Favorites from "./Components/Favorites";
-import Subscriptions from "./Components/Subscriptions"; // Correct import for Subscriptions component
-import { CartProvider } from "./contexts/CartContext"; // Import CartProvider
+import Subscriptions from "./Components/Subscriptions";
+import { CartProvider } from "./contexts/CartContext";
 import "./Styles/App.css";
 
-const API_KEY = "3e8344b6";
+const API_KEY = process.env.REACT_APP_OMDB_API_KEY;
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -94,10 +94,7 @@ function App() {
   };
 
   const handleUserInput = (input) => {
-    setUserEvents((prevEvents) => [
-      ...prevEvents,
-      `User input: ${input}`,
-    ]);
+    setUserEvents((prevEvents) => [...prevEvents, `User input: ${input}`]);
   };
 
   return (
@@ -113,23 +110,12 @@ function App() {
                   element={
                     <>
                       <SearchBox onSearch={searchMovies} />
-                      <div className="movie-rows">
-                        <MovieRow
-                          title="Trending Now"
-                          movies={movies.slice(0, 5)}
-                          onSelectMovie={fetchMovieDetails}
-                          onFavorite={toggleFavorite}
-                          favorites={favorites}
-                        />
-                        <MovieRow
-                          title="Recently Added"
-                          movies={movies.slice(5, 10)}
-                          onSelectMovie={fetchMovieDetails}
-                          onFavorite={toggleFavorite}
-                          favorites={favorites}
-                        />
-                        {/* Add more MovieRow components for other categories */}
-                      </div>
+                      <MovieRows
+                        movies={movies}
+                        onSelectMovie={fetchMovieDetails}
+                        onFavorite={toggleFavorite}
+                        favorites={favorites}
+                      />
                     </>
                   }
                 />
@@ -198,7 +184,3 @@ function App() {
 }
 
 export default App;
-
-
-
-

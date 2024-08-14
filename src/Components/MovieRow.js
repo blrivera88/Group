@@ -6,18 +6,26 @@ function MovieRow({ title, movies, onSelectMovie, onFavorite, favorites }) {
       <h2>{title}</h2>
       <div className="movies">
         {movies.map((movie) => {
-          const isFavorite = favorites.some((fav) => fav.imdbID === movie.imdbID);
+          const isFavorite = favorites.some(
+            (fav) => fav.imdbID === movie.imdbID
+          );
 
           return (
             <div key={movie.imdbID} className="movie">
               <img
-                src={movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/150"}
+                src={
+                  movie.Poster !== "N/A"
+                    ? movie.Poster
+                    : "https://via.placeholder.com/150"
+                }
                 alt={movie.Title}
                 style={{ width: "150px", height: "225px", objectFit: "cover" }}
               />
               <h3>{movie.Title}</h3>
               <p>{movie.Year}</p>
-              <button onClick={() => onSelectMovie(movie.imdbID)}>Details</button>
+              <button onClick={() => onSelectMovie(movie.imdbID)}>
+                Details
+              </button>
               <button onClick={() => onFavorite(movie)}>
                 {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
               </button>
