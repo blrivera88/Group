@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../contexts/CartContext";
-import styles from "./NavigationMenu.css";
+import styles from "../Styles/NavigationMenu.css";
 
 function NavigationMenu() {
   const { cart } = useContext(CartContext);

@@ -1,5 +1,6 @@
 import React from "react";
 import MovieRow from "./MovieRow";
+import "../Styles/MovieRows.css";
 
 const categories = [
   { title: "Trending Now", range: [0, 5] },
