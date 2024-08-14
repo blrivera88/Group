@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import list from "../subscriptionList";
 import { CartContext } from "../contexts/CartContext";
-import "./Subscriptions.css";  // Import custom CSS for styling
+import "../Styles/Subscriptions.css";
 
 function Subscriptions() {
   const { addToCart, cart } = useContext(CartContext);
@@ -15,17 +15,23 @@ function Subscriptions() {
       <div className="subscriptions-grid">
         {list.map((item) => (
           <div key={item.id} className="subscription-card">
-            <img src={item.img} alt={item.service} className="subscription-img" />
+            <img
+              src={item.img}
+              alt={item.service}
+              className="subscription-img"
+            />
             <div className="subscription-details">
               <h3 className="subscription-title">{item.service}</h3>
               <p className="subscription-info">{item.serviceInfo}</p>
               <p className="subscription-price">${item.price.toFixed(2)}</p>
               <button
-                className={`add-to-cart-button ${isInCart(item.id) ? 'in-cart' : ''}`}
+                className={`add-to-cart-button ${
+                  isInCart(item.id) ? "in-cart" : ""
+                }`}
                 onClick={() => addToCart(item)}
                 disabled={isInCart(item.id)}
               >
-                {isInCart(item.id) ? 'In Cart' : 'Add to Cart'}
+                {isInCart(item.id) ? "In Cart" : "Add to Cart"}
               </button>
             </div>
           </div>
@@ -36,5 +42,3 @@ function Subscriptions() {
 }
 
 export default Subscriptions;
-
-
