@@ -1,32 +1,33 @@
 import React, { useContext } from "react";
 import list from "../subscriptionList";
 import { CartContext } from "../contexts/CartContext";
-import "../Styles/Subscriptions.css";
+import styles from "../Styles/Subscriptions.module.css"; // Import the CSS module
 
 function Subscriptions() {
   const { addToCart, cart } = useContext(CartContext);
 
-  // Check if a subscription is already in the cart
   const isInCart = (id) => cart.some((item) => item.id === id);
 
   return (
-    <div className="subscriptions-container">
-      <h1 className="subscriptions-title">Choose Your Subscription</h1>
-      <div className="subscriptions-grid">
+    <div className={styles.subscriptionsContainer}>
+      <h1 className={styles.subscriptionsTitle}>Choose Your Subscription</h1>
+      <div className={styles.subscriptionsGrid}>
         {list.map((item) => (
-          <div key={item.id} className="subscription-card">
+          <div key={item.id} className={styles.subscriptionCard}>
             <img
               src={item.img}
               alt={item.service}
-              className="subscription-img"
+              className={styles.subscriptionImg}
             />
-            <div className="subscription-details">
-              <h3 className="subscription-title">{item.service}</h3>
-              <p className="subscription-info">{item.serviceInfo}</p>
-              <p className="subscription-price">${item.price.toFixed(2)}</p>
+            <div className={styles.subscriptionDetails}>
+              <h3 className={styles.subscriptionTitle}>{item.service}</h3>
+              <p className={styles.subscriptionInfo}>{item.serviceInfo}</p>
+              <p className={styles.subscriptionPrice}>
+                ${item.price.toFixed(2)}
+              </p>
               <button
-                className={`add-to-cart-button ${
-                  isInCart(item.id) ? "in-cart" : ""
+                className={`${styles.addToCartButton} ${
+                  isInCart(item.id) ? styles.inCart : ""
                 }`}
                 onClick={() => addToCart(item)}
                 disabled={isInCart(item.id)}

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from "../Styles/StreamList.module.css"; // Import the CSS module
 
 function StreamList({ onUserInput }) {
   const [input, setInput] = useState("");
@@ -50,28 +51,50 @@ function StreamList({ onUserInput }) {
   };
 
   return (
-    <div className="stream-list">
-      <h1>Stream List</h1>
-      <form onSubmit={handleSubmit}>
+    <div className={styles.streamListContainer}>
+      <h1 className={styles.streamListTitle}>Stream List</h1>
+      <form onSubmit={handleSubmit} className={styles.streamListSearch}>
         <input
           type="text"
           value={input}
           onChange={handleInputChange}
           placeholder="Enter movie title..."
+          className={styles.streamListInput}
         />
-        <button type="submit">{isEditing ? "Update Movie" : "Add Movie"}</button>
+        <button type="submit" className={styles.streamListButton}>
+          {isEditing ? "Update Movie" : "Add Movie"}
+        </button>
       </form>
-      <div className="user-events">
+      <div className={styles.userEvents}>
         <h2>Stream List Movies:</h2>
         <ul>
           {movies.map((movie) => (
-            <li key={movie.id} style={{ textDecoration: movie.isCompleted ? "line-through" : "none" }}>
+            <li
+              key={movie.id}
+              style={{
+                textDecoration: movie.isCompleted ? "line-through" : "none",
+              }}
+              className={styles.movieItem}
+            >
               {movie.title}
-              <button onClick={() => handleComplete(movie.id)}>
+              <button
+                onClick={() => handleComplete(movie.id)}
+                className={styles.movieActionButton}
+              >
                 {movie.isCompleted ? "Undo" : "Watch"}
               </button>
-              <button onClick={() => handleEdit(movie)}>Edit</button>
-              <button onClick={() => handleDelete(movie.id)}>Remove</button>
+              <button
+                onClick={() => handleEdit(movie)}
+                className={styles.movieActionButton}
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => handleDelete(movie.id)}
+                className={styles.movieActionButton}
+              >
+                Remove
+              </button>
             </li>
           ))}
         </ul>
@@ -81,7 +104,3 @@ function StreamList({ onUserInput }) {
 }
 
 export default StreamList;
-
-
-
-

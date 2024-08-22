@@ -1,0 +1,57 @@
+.cartContainer {
+  composes: container from "../App.css";
+}
+
+.cartTitle {
+  composes: title from "../App.css";
+}
+
+.cartItems {
+  margin-bottom: 30px;
+}
+
+.cartItem {
+  composes: card flex from "../App.css";
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.cartItemImage {
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+  object-fit: cover;
+}
+
+.cartItemDetails {
+  flex: 1;
+}
+
+.cartItemTitle {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.cartItemPrice {
+  color: #e50914;
+  font-size: 1.2em;
+}
+
+.cartSummary {
+  composes: card from "../App.css";
+}
+
+.cartSummary h3 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.cartSummary p {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.cartCheckoutButton {
+  width: 100%;
+  font-size: 1.2em;
+}

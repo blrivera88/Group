@@ -1,0 +1,19 @@
+.aboutContainer {
+  composes: container from "../App.css";
+}
+
+.aboutTitle {
+  composes: title from "../App.css";
+}
+
+.aboutContent {
+  font-size: 1.2em;
+  line-height: 1.8;
+  text-align: justify;
+}
+
+.aboutImage {
+  width: 100%;
+  margin: 20px 0;
+  border-radius: 10px;
+}

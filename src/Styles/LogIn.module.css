@@ -1,0 +1,24 @@
+.google-btn {
+  background-color: #333; /* Matches the dark theme */
+  color: white; /* White text to stand out */
+  border: 1px solid #444; /* Subtle border to match theme */
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 300px; /* Adjust width to your preference */
+  margin: 20px auto; /* Centering the button */
+}
+
+.google-btn img {
+  margin-right: 10px; /* Space between Google logo and text */
+}
+
+.google-btn:hover {
+  background-color: #555; /* Slightly lighter on hover */
+  box-shadow: 0px 0px 5px 2px rgba(255, 255, 255, 0.2); /* Soft shadow effect */
+}

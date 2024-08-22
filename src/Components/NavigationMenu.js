@@ -1,37 +1,40 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import { CartContext } from "../contexts/CartContext";
-import styles from "../Styles/NavigationMenu.css";
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { useGoogleLogin } from "@react-oauth/google";
+import styles from "../Styles/NavigationMenu.module.css";
 
 function NavigationMenu() {
-  const { cart } = useContext(CartContext);
-  const totalItemsInCart = cart.reduce(
-    (total, item) => total + item.quantity,
-    0
-  );
+  const login = useGoogleLogin({
+    onSuccess: (tokenResponse) => console.log(tokenResponse),
+  });
 
   return (
-    <nav className={styles.navigationMenu}>
-      <ul>
-        <NavItem to="/" label="Home" />
-        <NavItem to="/streamlist" label="Stream List" />
-        <NavItem to="/favorites" label="Favorites" />
-        <NavItem to="/movies" label="Movies" />
-        <NavItem to="/subscriptions" label="Subscriptions" />
-        <NavItem to="/cart" label={`Cart (${totalItemsInCart})`} />
-        <NavItem to="/about" label="About" />
-      </ul>
+    <nav className={styles.navbar}>
+      <div className={styles.logo}>MovieSearch</div>
+      <div className={styles.menu}>
+        <NavLink to="/" exact activeClassName={styles.active}>
+          Home
+        </NavLink>
+        <NavLink to="/stream-list" activeClassName={styles.active}>
+          Stream List
+        </NavLink>
+        <NavLink to="/movies" activeClassName={styles.active}>
+          Movies
+        </NavLink>
+        <NavLink to="/subscriptions" activeClassName={styles.active}>
+          Subscriptions
+        </NavLink>
+        <NavLink to="/cart" activeClassName={styles.active}>
+          Cart (0)
+        </NavLink>
+        <NavLink to="/about" activeClassName={styles.active}>
+          About
+        </NavLink>
+        <button className={styles.loginButton} onClick={() => login()}>
+          Login
+        </button>
+      </div>
     </nav>
-  );
-}
-
-function NavItem({ to, label }) {
-  return (
-    <li>
-      <Link to={to} className={styles.navLink}>
-        {label}
-      </Link>
-    </li>
   );
 }
 

@@ -1,0 +1,58 @@
+.navbar {
+  background-color: #222; /* Dark background to match the theme */
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #444; /* Subtle border for separation */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+}
+
+.navbar a,
+.navbar button {
+  color: #fff; /* White text for contrast */
+  text-decoration: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.navbar a:hover,
+.navbar button:hover {
+  background-color: #555; /* Slight background change on hover */
+  color: #f00; /* Red text on hover to match theme accents */
+  border-radius: 5px; /* Soft rounded edges on hover */
+}
+
+.navbar .logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.navbar .menu {
+  display: flex;
+  gap: 20px; /* Even spacing between menu items */
+}
+
+.navbar .loginButton {
+  background-color: #f00; /* Red background to stand out */
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.navbar .loginButton:hover {
+  background-color: #ff5555; /* Slightly lighter red on hover */
+}
+
+@media (max-width: 768px) {
+  .navbar .menu {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
