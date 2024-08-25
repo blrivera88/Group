@@ -1,9 +1,10 @@
+/* Styles/components/Cart.module.css */
 .cartContainer {
-  composes: container from "../App.css";
+  composes: container from "../base/common.css";
 }
 
 .cartTitle {
-  composes: title from "../App.css";
+  composes: title from "../base/common.css";
 }
 
 .cartItems {
@@ -11,7 +12,8 @@
 }
 
 .cartItem {
-  composes: card flex from "../App.css";
+  composes: card from "../base/common.css";
+  display: flex;
   align-items: center;
   margin-bottom: 15px;
 }
@@ -33,12 +35,12 @@
 }
 
 .cartItemPrice {
-  color: #e50914;
+  color: var(--primary-color);
   font-size: 1.2em;
 }
 
 .cartSummary {
-  composes: card from "../App.css";
+  composes: card from "../base/common.css";
 }
 
 .cartSummary h3 {

@@ -1,9 +1,10 @@
+/* Styles/components/Subscriptions.module.css */
 .subscriptions-container {
-  composes: container from "../App.css";
+  composes: container from "../base/common.css";
 }
 
 .subscriptions-title {
-  composes: title from "../App.css";
+  composes: title from "../base/common.css";
 }
 
 .subscriptions-grid {
@@ -13,7 +14,7 @@
 }
 
 .subscription-card {
-  composes: card from "../App.css";
+  composes: card from "../base/common.css";
   overflow: hidden;
 }
 
@@ -34,6 +35,6 @@
 
 .subscription-price {
   font-size: 1.25em;
-  color: #e50914;
+  color: var(--primary-color);
   margin-bottom: 20px;
 }

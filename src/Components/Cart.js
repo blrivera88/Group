@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { CartContext } from "../contexts/CartContext";
-import styles from "../Styles/Cart.module.css"; // Import the CSS module
+import styles from "../Styles/components/Cart.module.css"; // Import the CSS module
 
 function Cart() {
   const { cart, removeFromCart, updateQuantity, totalAmount } =

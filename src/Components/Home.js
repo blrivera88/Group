@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "../Styles/Home.module.css"; // Import the CSS module
+import styles from "../Styles/components/Home.module.css";
 
 const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
 
@@ -7,15 +7,25 @@ function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const [movies, setMovies] = useState([]);
   const [favorites, setFavorites] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (searchTerm) {
-      searchMovies(searchTerm);
-    }
+    const delayDebounceFn = setTimeout(() => {
+      if (searchTerm) {
+        searchMovies(searchTerm);
+      }
+    }, 300); // Debounce time (300ms)
+
+    return () => clearTimeout(delayDebounceFn);
   }, [searchTerm]);
 
   const searchMovies = async (term) => {
     try {
+      if (!API_KEY) {
+        throw new Error(
+          "API Key not found. Please set REACT_APP_TMDB_API_KEY in your .env file."
+        );
+      }
       const response = await fetch(
         `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${term}`
       );
@@ -23,13 +33,15 @@ function Home() {
 
       if (data.results) {
         setMovies(data.results);
+        setError(null);
       } else {
         setMovies([]);
-        console.error("No results found");
+        setError("No results found");
       }
     } catch (error) {
       console.error("Error fetching movies:", error);
       setMovies([]);
+      setError("Failed to fetch movies. Please try again later.");
     }
   };
 
@@ -60,13 +72,26 @@ function Home() {
           onChange={handleSearchInputChange}
           className={styles.searchInput}
         />
-        <button
-          onClick={() => searchMovies(searchTerm)}
-          className={styles.searchButton}
-        >
-          Search
-        </button>
+        {searchTerm && (
+          <div className={styles.dropdown}>
+            {movies.length > 0 ? (
+              movies.map((movie) => (
+                <div
+                  key={movie.id}
+                  className={styles.dropdownItem}
+                  onClick={() => addToFavorites(movie)}
+                >
+                  {movie.title} ({movie.release_date.split("-")[0]})
+                </div>
+              ))
+            ) : (
+              <div className={styles.noResults}>No results found</div>
+            )}
+          </div>
+        )}
       </div>
+
+      {error && <p className={styles.error}>{error}</p>}
 
       <div className={styles.movieResults}>
         <h2 className={styles.sectionTitle}>Results</h2>

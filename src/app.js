@@ -8,7 +8,6 @@ import Cart from "./Components/Cart";
 import About from "./Components/About";
 import Subscriptions from "./Components/Subscriptions";
 import { CartProvider } from "./contexts/CartContext";
-import "./App.css";
 
 function App() {
   return (
@@ -19,7 +18,7 @@ function App() {
           <div className="content-container">
             <div className="main-content">
               <Routes>
-                <Route path="/" element={<Home />} />{" "}
+                <Route path="/" element={<Home />} />
                 <Route path="/movies" element={<Movies />} />
                 <Route path="/streamlist" element={<StreamList />} />
                 <Route path="/cart" element={<Cart />} />

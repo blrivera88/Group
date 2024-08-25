@@ -1,9 +1,10 @@
+/* Styles/components/About.module.css */
 .aboutContainer {
-  composes: container from "../App.css";
+  composes: container from "../base/common.css";
 }
 
 .aboutTitle {
-  composes: title from "../App.css";
+  composes: title from "../base/common.css";
 }
 
 .aboutContent {

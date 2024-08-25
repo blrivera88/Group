@@ -1,0 +1,9 @@
+/* Styles/base/variables.css */
+:root {
+  --primary-color: #e50914;
+  --secondary-color: #e5e5e5;
+  --background-color: #141414;
+  --card-background: #202020;
+  --hover-transform: translateY(-5px);
+  --font-family: "Roboto", Arial, sans-serif;
+}

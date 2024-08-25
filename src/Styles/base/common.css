@@ -1,10 +1,12 @@
-/* Global styles */
+/* Styles/base/common.css */
+@import "./variables.css";
+
 body {
-  font-family: "Roboto", Arial, sans-serif;
+  font-family: var(--font-family);
   margin: 0;
   padding: 0;
-  background-color: #141414;
-  color: #e5e5e5;
+  background-color: var(--background-color);
+  color: var(--secondary-color);
   line-height: 1.6;
 }
 
@@ -15,15 +17,14 @@ a {
 }
 
 a:hover {
-  color: #e50914;
+  color: var(--primary-color);
 }
 
-/* Button styles */
 button {
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
-  background-color: #e50914;
+  background-color: var(--primary-color);
   color: white;
   font-size: 16px;
   cursor: pointer;
@@ -34,49 +35,44 @@ button:hover {
   background-color: #b81d24;
 }
 
-/* Input styles */
 input {
   padding: 10px;
   border-radius: 4px;
   border: 1px solid #333;
   background-color: #333;
-  color: #e5e5e5;
+  color: var(--secondary-color);
   font-size: 16px;
 }
 
 input:focus {
-  border-color: #e50914;
+  border-color: var(--primary-color);
 }
 
-/* Container styles */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
 
-/* Title styles */
 .title {
   text-align: center;
-  color: #e5e5e5;
+  color: var(--secondary-color);
   font-size: 2em;
   margin-bottom: 20px;
 }
 
-/* Box-shadow for Cards */
 .card {
-  background-color: #202020;
+  background-color: var(--card-background);
   border-radius: 10px;
   padding: 15px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  transform: var(--hover-transform);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Flexbox layout */
 .flex {
   display: flex;
   align-items: center;
@@ -95,7 +91,6 @@ input:focus {
   flex-wrap: wrap;
 }
 
-/* Image styles */
 .img-cover {
   width: 100%;
   height: auto;

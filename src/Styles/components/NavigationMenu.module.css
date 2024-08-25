@@ -1,0 +1,77 @@
+/* Styles/components/NavigationMenu.module.css */
+.navbar {
+  background-color: #1a1a1a;
+  padding: 15px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #333;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.navbar a,
+.navbar button {
+  color: var(--secondary-color);
+  text-decoration: none;
+  padding: 10px 20px;
+  font-size: 18px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar a:hover,
+.navbar button:hover {
+  background-color: #444;
+  color: var(--primary-color);
+  border-radius: 25px;
+}
+
+.navbar .logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--primary-color);
+  letter-spacing: 2px;
+}
+
+.navbar .menu {
+  display: flex;
+  gap: 30px;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.navbar .loginButton {
+  background-color: var(--primary-color);
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin-left: auto;
+}
+
+.navbar .loginButton:hover {
+  background-color: #c0392b;
+}
+
+.navbar .userName {
+  color: var(--secondary-color);
+  font-size: 18px;
+  margin-left: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.navbar .errorMessage {
+  color: var(--primary-color);
+  margin-left: 20px;
+  font-size: 14px;
+}

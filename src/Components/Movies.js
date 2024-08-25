@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "../Styles/Movies.module.css"; // Import the CSS module
+import styles from "../Styles/components/Movies.module.css"; // Import the CSS module
 
 const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
 

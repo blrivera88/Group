@@ -1,0 +1,41 @@
+/* Styles/components/StreamList.module.css */
+.streamListContainer {
+  composes: container from "../base/common.css";
+}
+
+.streamListTitle {
+  composes: title from "../base/common.css";
+}
+
+.streamListSearch {
+  composes: flex-center from "../utilities.css";
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.streamListInput {
+  width: 70%;
+}
+
+.streamListResults {
+  margin-top: 20px;
+}
+
+.streamItem {
+  composes: card from "../base/common.css";
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.streamItemImage {
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+  object-fit: cover;
+}
+
+.streamItemTitle {
+  font-size: 1.5em;
+  margin-bottom: 5px;
+}

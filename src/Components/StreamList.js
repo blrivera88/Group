@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "../Styles/StreamList.module.css"; // Import the CSS module
+import styles from "../Styles/components/StreamList.module.css"; // Import the CSS module
 
 function StreamList({ onUserInput }) {
   const [input, setInput] = useState("");
