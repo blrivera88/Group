@@ -1,10 +1,15 @@
 /* Styles/components/StreamList.module.css */
 .streamListContainer {
-  composes: container from "../base/common.css";
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 20px 20px 20px;
+  color: var(--secondary-color);
 }
 
 .streamListTitle {
-  composes: title from "../base/common.css";
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 40px;
 }
 
 .streamListSearch {

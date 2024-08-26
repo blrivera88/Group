@@ -75,6 +75,7 @@ function Movies() {
 
   return (
     <div className={styles.moviesContainer}>
+      <h1 className={styles.moviesContainer}>Movies</h1>
       <div className={styles.searchBox}>
         <input
           type="text"

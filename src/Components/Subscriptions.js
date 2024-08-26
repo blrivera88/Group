@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import list from "../subscriptionList";
+import list from "../data/subscriptionList";
 import { CartContext } from "../contexts/CartContext";
-import styles from "../Styles/components/Subscriptions.module.css"; // Import the CSS module
+import styles from "../Styles/components/Subscriptions.module.css";
 
 function Subscriptions() {
   const { addToCart, cart } = useContext(CartContext);

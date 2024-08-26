@@ -7,6 +7,7 @@ import StreamList from "./Components/StreamList";
 import Cart from "./Components/Cart";
 import About from "./Components/About";
 import Subscriptions from "./Components/Subscriptions";
+import Checkout from "./Components/Checkout";
 import { CartProvider } from "./contexts/CartContext";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/subscriptions" element={<Subscriptions />} />
+                <Route path="/checkout" element={<Checkout />} />{" "}
               </Routes>
             </div>
           </div>

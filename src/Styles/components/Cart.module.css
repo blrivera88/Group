@@ -1,28 +1,40 @@
-/* Styles/components/Cart.module.css */
 .cartContainer {
-  composes: container from "../base/common.css";
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 20px 20px 20px;
+  color: var(--secondary-color);
 }
 
 .cartTitle {
-  composes: title from "../base/common.css";
-}
-
-.cartItems {
+  text-align: center;
+  font-size: 2.5rem;
   margin-bottom: 30px;
 }
 
+.cartItems {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
 .cartItem {
-  composes: card from "../base/common.css";
   display: flex;
+  background-color: var(--card-background);
+  border-radius: 10px;
+  padding: 15px;
   align-items: center;
-  margin-bottom: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cartItem:hover {
+  transform: var(--hover-transform);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .cartItemImage {
-  width: 100px;
-  height: 100px;
+  max-width: 100px;
   margin-right: 20px;
-  object-fit: cover;
+  border-radius: 5px;
 }
 
 .cartItemDetails {
@@ -30,30 +42,81 @@
 }
 
 .cartItemTitle {
-  font-size: 1.5em;
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+  color: var(--secondary-color);
+}
+
+.cartItemInfo {
   margin-bottom: 10px;
+  color: var(--secondary-color);
 }
 
 .cartItemPrice {
+  font-size: 1.2rem;
   color: var(--primary-color);
-  font-size: 1.2em;
-}
-
-.cartSummary {
-  composes: card from "../base/common.css";
-}
-
-.cartSummary h3 {
-  font-size: 2em;
-  margin-bottom: 20px;
-}
-
-.cartSummary p {
-  font-size: 1.5em;
   margin-bottom: 10px;
 }
 
+.cartItemQuantity {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.quantityInput {
+  width: 50px;
+  padding: 5px;
+  margin-left: 10px;
+  border-radius: 5px;
+  border: 1px solid #333;
+  background-color: #333;
+  color: var(--secondary-color);
+}
+
+.cartItemButton {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cartItemButton:hover {
+  background-color: #b81d24;
+}
+
+.emptyCartMessage {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 50px 0;
+}
+
+.cartSummary {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.totalAmount {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
 .cartCheckoutButton {
-  width: 100%;
-  font-size: 1.2em;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cartCheckoutButton:hover {
+  background-color: #b81d24;
 }

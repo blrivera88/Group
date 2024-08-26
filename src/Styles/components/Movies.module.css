@@ -1,16 +1,27 @@
 /* Styles/components/Movies.module.css */
 .moviesContainer {
-  composes: container from "../base/common.css";
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 80px 20px 20px 20px;
   color: var(--secondary-color);
 }
 
 .moviesTitle {
-  composes: title from "../base/common.css";
-  font-size: 2em;
-  margin-bottom: 20px;
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+}
+
+.homeContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 20px 20px 20px;
+  color: var(--secondary-color);
+}
+.homeTitle {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 40px;
 }
 
 .movieList {

@@ -1,10 +1,16 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { CartContext } from "../contexts/CartContext";
-import styles from "../Styles/components/Cart.module.css"; // Import the CSS module
+import styles from "../Styles/components/Cart.module.css";
 
 function Cart() {
   const { cart, removeFromCart, updateQuantity, totalAmount } =
     useContext(CartContext);
+  const navigate = useNavigate();
+
+  const handleCheckout = () => {
+    navigate("/checkout");
+  };
 
   return (
     <div className={styles.cartContainer}>
@@ -20,11 +26,12 @@ function Cart() {
               />
               <div className={styles.cartItemDetails}>
                 <h3 className={styles.cartItemTitle}>{item.service}</h3>
-                <p>{item.serviceInfo}</p>
-                <p className={styles.cartItemPrice}>Price: ${item.price}</p>
+                <p className={styles.cartItemInfo}>{item.serviceInfo}</p>
+                <p className={styles.cartItemPrice}>${item.price}</p>
                 <div className={styles.cartItemQuantity}>
-                  <label>Quantity: </label>
+                  <label htmlFor={`quantity-${item.id}`}>Quantity: </label>
                   <input
+                    id={`quantity-${item.id}`}
                     type="number"
                     value={item.quantity}
                     min="1"
@@ -47,8 +54,12 @@ function Cart() {
       ) : (
         <p className={styles.emptyCartMessage}>Your cart is empty.</p>
       )}
-      <h2 className={styles.totalAmount}>Total: ${totalAmount.toFixed(2)}</h2>
-      <button className={styles.cartCheckoutButton}>Proceed to Checkout</button>
+      <div className={styles.cartSummary}>
+        <h2 className={styles.totalAmount}>Total: ${totalAmount.toFixed(2)}</h2>
+        <button onClick={handleCheckout} className={styles.cartCheckoutButton}>
+          Proceed to Checkout
+        </button>
+      </div>
     </div>
   );
 }
