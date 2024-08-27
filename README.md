@@ -1,3 +1,9 @@
+#MovieSearch
+![image](https://github.com/user-attachments/assets/ad92cb09-d0ad-4b8a-b2ad-954ec12c521d)
+
+![image](https://github.com/user-attachments/assets/4443f2e4-42ef-4f42-9d8f-3b6231f52355)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
