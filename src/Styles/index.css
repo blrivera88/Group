@@ -5,8 +5,7 @@
 @import "./utilities.css";
 @import "./components/About.module.css";
 @import "./components/Cart.module.css";
-@import "./components/Home.module.css";
+@import "./components/StreamList.module.css";
 @import "./components/Movies.module.css";
 @import "./components/NavigationMenu.module.css";
-@import "./components/StreamList.module.css";
 @import "./components/Subscriptions.module.css";

@@ -43,12 +43,6 @@ function NavigationMenu() {
           Home
         </NavLink>
         <NavLink
-          to="/streamlist"
-          className={({ isActive }) => (isActive ? styles.active : undefined)}
-        >
-          Stream List
-        </NavLink>
-        <NavLink
           to="/movies"
           className={({ isActive }) => (isActive ? styles.active : undefined)}
         >

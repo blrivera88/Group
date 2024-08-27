@@ -1,215 +1,167 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import styles from "../Styles/components/Movies.module.css"; // Import the CSS module
 
 const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
 
 function Movies() {
-  const [movies, setMovies] = useState([]);
-  const [selectedMovie, setSelectedMovie] = useState(null);
-  const [favorites, setFavorites] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  console.log("API Key:", API_KEY); // Debugging the API Key
+
+  const [featuredMovie, setFeaturedMovie] = useState(null);
+  const [categories, setCategories] = useState({});
+  const [genres, setGenres] = useState([]);
+  const [selectedGenre, setSelectedGenre] = useState(
+    localStorage.getItem("selectedGenre") || ""
+  );
+  const [selectedYear, setSelectedYear] = useState(
+    localStorage.getItem("selectedYear") || ""
+  );
+  const [selectedRating, setSelectedRating] = useState(
+    localStorage.getItem("selectedRating") || ""
+  );
 
   useEffect(() => {
-    if (searchTerm) {
-      searchMovies(searchTerm);
-    }
-  }, [searchTerm]);
+    const fetchMovies = async () => {
+      const categories = {
+        "Action & Adventure": "28",
+        "Critically Acclaimed": "12",
+        "Top Rated": "top_rated",
+        Popular: "popular",
+        "Now Playing": "now_playing",
+      };
 
-  const searchMovies = async (term) => {
+      const promises = Object.keys(categories).map(async (category) => {
+        const url = categories[category].match(/^\d+$/)
+          ? `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${categories[category]}`
+          : `https://api.themoviedb.org/3/movie/${categories[category]}?api_key=${API_KEY}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        return { category, movies: data.results };
+      });
+
+      const results = await Promise.all(promises);
+      const categoriesData = {};
+      results.forEach(({ category, movies }) => {
+        categoriesData[category] = movies;
+      });
+
+      setCategories(categoriesData);
+
+      // Set Trolls movie as the featured movie
+      setFeaturedMovie({
+        title: "Trolls",
+        overview:
+          "After the monstrous Bergens invade Troll Village, Princess Poppy, the happiest Troll ever born, and overly-cautious, curmudgeonly outcast Branch set off on a journey to rescue her friends. Their mission is full of adventure and mishaps, as this mismatched duo try to tolerate each other long enough to get the job done.",
+        backdrop_path: "/gWCWHybWuVg3GmZpdY8qWGb85HR.jpg",
+        id: 136799,
+      });
+    };
+
+    fetchMovies();
+    fetchGenres(); // Call to fetch genres
+  }, [API_KEY]);
+
+  const fetchGenres = async () => {
     try {
       const response = await fetch(
-        `https://www.omdbapi.com/?s=${term}&apikey=${API_KEY}`
+        `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
       );
       const data = await response.json();
-
-      if (data.Response === "True") {
-        setMovies(data.Search);
-      } else {
-        setMovies([]);
-        console.error("API Error:", data.Error);
-      }
+      setGenres(data.genres);
     } catch (error) {
-      console.error("Error fetching movies:", error);
-      setMovies([]);
+      console.error("Error fetching genres:", error);
     }
   };
 
-  const fetchMovieDetails = async (movieId) => {
-    try {
-      const response = await fetch(
-        `https://www.omdbapi.com/?i=${movieId}&apikey=${API_KEY}`
-      );
-      const data = await response.json();
+  useEffect(() => {
+    localStorage.setItem("selectedGenre", selectedGenre);
+  }, [selectedGenre]);
 
-      if (data.Response === "True") {
-        setSelectedMovie(data);
-      } else {
-        console.error("API Error:", data.Error);
-      }
-    } catch (error) {
-      console.error("Error fetching movie details:", error);
-    }
+  useEffect(() => {
+    localStorage.setItem("selectedYear", selectedYear);
+  }, [selectedYear]);
+
+  useEffect(() => {
+    localStorage.setItem("selectedRating", selectedRating);
+  }, [selectedRating]);
+
+  const handleGenreChange = (event) => {
+    setSelectedGenre(event.target.value);
   };
 
-  const toggleFavorite = (movie) => {
-    const isFavorite = favorites.some((fav) => fav.imdbID === movie.imdbID);
-
-    if (isFavorite) {
-      setFavorites((prevFavorites) =>
-        prevFavorites.filter((fav) => fav.imdbID !== movie.imdbID)
-      );
-    } else {
-      setFavorites((prevFavorites) => [...prevFavorites, movie]);
-    }
+  const handleYearChange = (event) => {
+    setSelectedYear(event.target.value);
   };
 
-  const handleSearchInputChange = (event) => {
-    setSearchTerm(event.target.value);
+  const handleRatingChange = (event) => {
+    setSelectedRating(event.target.value);
   };
 
-  const handleRemoveFavorite = (movieId) => {
-    setFavorites((prevFavorites) =>
-      prevFavorites.filter((movie) => movie.imdbID !== movieId)
-    );
-  };
+  const filteredMovies = (movies) =>
+    movies.filter((movie) => {
+      const matchesGenre = selectedGenre
+        ? movie.genre_ids.includes(parseInt(selectedGenre))
+        : true;
+      const matchesYear = selectedYear
+        ? new Date(movie.release_date).getFullYear() === parseInt(selectedYear)
+        : true;
+      const matchesRating = selectedRating
+        ? movie.vote_average >= parseFloat(selectedRating)
+        : true;
+      return matchesGenre && matchesYear && matchesRating;
+    });
 
   return (
     <div className={styles.moviesContainer}>
-      <h1 className={styles.moviesContainer}>Movies</h1>
-      <div className={styles.searchBox}>
-        <input
-          type="text"
-          placeholder="Search Movie Title ..."
-          value={searchTerm}
-          onChange={handleSearchInputChange}
-          className={styles.searchInput}
-        />
-        <button
-          onClick={() => searchMovies(searchTerm)}
-          className={styles.searchButton}
+      {featuredMovie && (
+        <div
+          className={styles.featuredMovie}
+          style={{
+            backgroundImage: `url(https://image.tmdb.org/t/p/original${featuredMovie.backdrop_path})`,
+          }}
         >
-          Search
-        </button>
-      </div>
-
-      <div className={styles.movieRows}>
-        <h2 className={styles.sectionTitle}>Trending Now</h2>
-        <div className={styles.movies}>
-          {movies.slice(0, 5).map((movie) => (
-            <div key={movie.imdbID} className={styles.movie}>
-              <img
-                src={
-                  movie.Poster !== "N/A"
-                    ? movie.Poster
-                    : "https://via.placeholder.com/150"
-                }
-                alt={movie.Title}
-                className={styles.movieImage}
-              />
-              <h3>{movie.Title}</h3>
-              <p>{movie.Year}</p>
-              <button
-                onClick={() => fetchMovieDetails(movie.imdbID)}
-                className={styles.detailsButton}
-              >
-                Details
-              </button>
-              <button
-                onClick={() => toggleFavorite(movie)}
-                className={styles.favoriteButton}
-              >
-                {favorites.some((fav) => fav.imdbID === movie.imdbID)
-                  ? "Remove from Favorites"
-                  : "Add to Favorites"}
-              </button>
+          <div className={styles.featuredContent}>
+            <h1>{featuredMovie.title}</h1>
+            <p>{featuredMovie.overview}</p>
+            <div className={styles.buttons}>
+              <button>Play</button>
+              <Link to={`/movie/${featuredMovie.id}`}>
+                <button>More Info</button>
+              </Link>
             </div>
-          ))}
-        </div>
-
-        <h2 className={styles.sectionTitle}>Recently Added</h2>
-        <div className={styles.movies}>
-          {movies.slice(5, 10).map((movie) => (
-            <div key={movie.imdbID} className={styles.movie}>
-              <img
-                src={
-                  movie.Poster !== "N/A"
-                    ? movie.Poster
-                    : "https://via.placeholder.com/150"
-                }
-                alt={movie.Title}
-                className={styles.movieImage}
-              />
-              <h3>{movie.Title}</h3>
-              <p>{movie.Year}</p>
-              <button
-                onClick={() => fetchMovieDetails(movie.imdbID)}
-                className={styles.detailsButton}
-              >
-                Details
-              </button>
-              <button
-                onClick={() => toggleFavorite(movie)}
-                className={styles.favoriteButton}
-              >
-                {favorites.some((fav) => fav.imdbID === movie.imdbID)
-                  ? "Remove from Favorites"
-                  : "Add to Favorites"}
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className={styles.favorites}>
-        <h2 className={styles.sectionTitle}>Favorites</h2>
-        {favorites.length > 0 ? (
-          <ul className={styles.favoriteList}>
-            {favorites.map((movie) => (
-              <li key={movie.imdbID} className={styles.favoriteItem}>
-                <h3>{movie.Title}</h3>
-                <p>{movie.Year}</p>
-                <button
-                  onClick={() => handleRemoveFavorite(movie.imdbID)}
-                  className={styles.removeFavoriteButton}
-                >
-                  Remove from Favorites
-                </button>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className={styles.noFavorites}>No favorite movies added yet.</p>
-        )}
-      </div>
-
-      {selectedMovie && (
-        <div className={styles.movieDetailsModal}>
-          <div className={styles.modalContent}>
-            <button
-              onClick={() => setSelectedMovie(null)}
-              className={styles.closeButton}
-            >
-              &times;
-            </button>
-            <h2>{selectedMovie.Title}</h2>
-            <p>{selectedMovie.Year}</p>
-            <p>{selectedMovie.Genre}</p>
-            <p>{selectedMovie.Plot}</p>
-            <p>{selectedMovie.Actors}</p>
-            <p>{selectedMovie.Language}</p>
-            <p>{selectedMovie.Awards}</p>
-            <img
-              src={
-                selectedMovie.Poster !== "N/A"
-                  ? selectedMovie.Poster
-                  : "https://via.placeholder.com/150"
-              }
-              alt={selectedMovie.Title}
-              className={styles.modalImage}
-            />
           </div>
+          <div className={styles.fadeBottom}></div>
         </div>
       )}
+      {Object.keys(categories).map((category) => (
+        <div key={category} className={styles.movieCategory}>
+          <h2>{category}</h2>
+          <div className={styles.moviesRow}>
+            {categories[category] &&
+              filteredMovies(categories[category]).map((movie) => (
+                <Link to={`/movie/${movie.id}`} key={movie.id}>
+                  <div className={styles.movieItems}>
+                    <img
+                      src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                      alt={movie.title}
+                      className={styles.moviePoster}
+                      loading="lazy"
+                    />
+                    <div className={styles.movieInfo}>
+                      <h2 className={styles.movieTitle}>{movie.title}</h2>
+                      <p className={styles.movieYear}>
+                        Year: {new Date(movie.release_date).getFullYear()}
+                      </p>
+                      <p className={styles.movieRating}>
+                        Rating: {movie.vote_average}
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

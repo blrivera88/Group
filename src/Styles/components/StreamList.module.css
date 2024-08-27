@@ -1,46 +1,242 @@
-/* Styles/components/StreamList.module.css */
-.streamListContainer {
+/* Styles/components/Home.module.css */
+.homeContainer {
   max-width: 1200px;
   margin: 0 auto;
   padding: 80px 20px 20px 20px;
   color: var(--secondary-color);
 }
-
-.streamListTitle {
+.homeTitle {
   text-align: center;
   font-size: 2.5rem;
   margin-bottom: 40px;
 }
 
-.streamListSearch {
-  composes: flex-center from "../utilities.css";
-  justify-content: center;
+.title {
+  composes: title from "../base/common.css";
+}
+
+.searchBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.searchInput {
+  width: 70%;
+  padding: 12px 15px;
+  border-radius: 25px;
+  border: 2px solid #e50914;
+  background-color: #1c1c1c;
+  color: var(--secondary-color);
+  font-size: 16px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.searchInput:focus {
+  border-color: #e50914;
+  box-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.actionButton {
+  margin: 10px 5px;
+  padding: 12px 25px;
+  background-color: #e50914;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.actionButton:hover {
+  background-color: #b81d24;
+  transform: translateY(-2px);
+}
+
+.dropdown {
+  position: absolute;
+  top: 120%;
+  width: 70%;
+  left: 15%;
+  right: 15%;
+  background-color: #1c1c1c;
+  border: 2px solid #e50914;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: var(--secondary-color);
+}
+
+.dropdownItem img {
+  width: 50px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-right: 15px;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.titleText {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.dateText {
+  font-size: 0.8rem;
+  color: #bbb; /* A lighter color for the date */
+}
+
+.dropdownItem:hover {
+  background-color: #e50914;
+  color: #fff;
+}
+
+.noResults {
+  padding: 10px 20px;
+  color: var(--secondary-color);
+  text-align: center;
+}
+
+.movieResults {
+  margin-top: 40px;
+}
+
+.sectionTitle {
+  font-size: 1.5em;
   margin-bottom: 20px;
 }
 
-.streamListInput {
-  width: 70%;
+.movieList {
+  list-style: none;
+  padding: 0;
+  display: flex; /* Aligns movie tiles horizontally */
+  gap: 20px; /* Adds space between movie tiles */
 }
 
-.streamListResults {
+.movieItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: var(--card-background);
+  border-radius: 10px;
+  padding: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movieItem:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.movieImage {
+  border-radius: 5px;
+  margin-right: 20px;
+}
+
+.movieTile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--card-background);
+  border-radius: 10px;
+  padding: 15px;
+  width: 150px;
+}
+
+.movieTileImage {
+  border-radius: 5px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.movieTileTitle {
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 10px;
+  color: var(--secondary-color);
+}
+
+.addButton,
+.removeButton {
+  margin-left: auto;
+}
+
+.favorites {
+  margin-top: 40px;
+}
+
+.noFavorites {
+  color: var(--secondary-color);
+  text-align: center;
+}
+
+/* New styles for detailed movie information display */
+.movieDetails {
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+  background-color: #333;
+  border-radius: 10px;
   margin-top: 20px;
 }
 
-.streamItem {
-  composes: card from "../base/common.css";
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.streamItemImage {
-  width: 100px;
-  height: 100px;
+.moviePoster {
+  width: 200px;
+  height: auto;
+  border-radius: 10px;
   margin-right: 20px;
-  object-fit: cover;
 }
 
-.streamItemTitle {
-  font-size: 1.5em;
-  margin-bottom: 5px;
+.movieInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.movieInfo h2 {
+  margin-bottom: 10px;
+}
+
+.movieInfo p {
+  margin: 5px 0;
+}
+
+.movieInfo p strong {
+  color: #e50914;
+}
+
+.removeButton {
+  margin-top: 10px;
+  background-color: #e50914;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.removeButton:hover {
+  background-color: #b81d24;
 }
