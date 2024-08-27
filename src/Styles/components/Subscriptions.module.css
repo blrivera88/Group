@@ -70,7 +70,7 @@
 }
 
 .addToCartButton:hover {
-  background-color: #b81d24;
+  background-color: var(--primary-color-hover);
 }
 
 .inCart {

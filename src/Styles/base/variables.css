@@ -1,8 +1,23 @@
 /* Styles/base/variables.css */
+
+/* Light Theme */
 :root {
   --primary-color: #e50914;
+  --primary-color-hover: #c20f0f;
   --secondary-color: #e5e5e5;
   --background-color: #141414;
+  --card-background: #202020;
+  --hover-transform: translateY(-5px);
+  --font-family: "Roboto", Arial, sans-serif;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --primary-color: #1e90ff;
+  --primary-color-hover: #187bcd;
+  --secondary-color: #dcdde1;
+  --background-color: #2f3542;
+  --text-color: #f1f2f6;
   --card-background: #202020;
   --hover-transform: translateY(-5px);
   --font-family: "Roboto", Arial, sans-serif;

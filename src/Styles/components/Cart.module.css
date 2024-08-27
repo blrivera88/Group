@@ -86,7 +86,7 @@
 }
 
 .cartItemButton:hover {
-  background-color: #b81d24;
+  background-color: var(--primary-color-hover);
 }
 
 .emptyCartMessage {
@@ -118,5 +118,5 @@
 }
 
 .cartCheckoutButton:hover {
-  background-color: #b81d24;
+  background-color: var(--primary-color-hover);
 }

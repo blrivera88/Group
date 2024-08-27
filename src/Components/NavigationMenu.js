@@ -1,34 +1,15 @@
-import React, { useContext, useState } from "react";
+// src/Components/NavigationMenu.js
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { CartContext } from "../contexts/CartContext";
 import { GoogleAuthContext } from "../contexts/GoogleAuthContext";
-import { CartContext } from "../contexts/CartContext"; // Import CartContext
-import { useGoogleLogin } from "@react-oauth/google";
+import { ThemeContext } from "../contexts/ThemeContext"; // Import ThemeContext
 import styles from "../Styles/components/NavigationMenu.module.css";
 
 function NavigationMenu() {
-  const { user, login, logout } = useContext(GoogleAuthContext);
-  const { cart } = useContext(CartContext); // Use CartContext to get cart data
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const googleLogin = useGoogleLogin({
-    onSuccess: (tokenResponse) => {
-      setLoading(false);
-      login(tokenResponse);
-    },
-    onError: (errorResponse) => {
-      setLoading(false);
-      setError("Login failed. Please try again.");
-      console.error("Login error:", errorResponse);
-    },
-  });
-
-  const handleLogin = () => {
-    setLoading(true);
-    setError(null);
-    googleLogin();
-  };
-
+  const { cart } = useContext(CartContext);
+  const { user, logout } = useContext(GoogleAuthContext);
+  const { theme, toggleTheme } = useContext(ThemeContext); // Use ThemeContext
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   return (
@@ -71,17 +52,18 @@ function NavigationMenu() {
             Logout
           </button>
         ) : (
-          <button
-            className={styles.loginButton}
-            onClick={handleLogin}
-            disabled={loading}
-            aria-label="Sign in with Google"
+          <NavLink
+            to="/login"
+            className={({ isActive }) => (isActive ? styles.active : undefined)}
           >
-            {loading ? "Signing in..." : "Login"}
-          </button>
+            Login
+          </NavLink>
         )}
+        {/* Theme Toggle Button */}
+        <button onClick={toggleTheme} className={styles.themeToggle}>
+          {theme === "light" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+        </button>
       </div>
-      {error && <div className={styles.errorMessage}>{error}</div>}
     </nav>
   );
 }

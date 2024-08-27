@@ -46,6 +46,11 @@
 
 .buttons button {
   padding: 10px 20px;
+  background-color: var(--primary-color);
+}
+
+.buttons button:hover {
+  background-color: var(--primary-color-hover);
 }
 
 .fadeBottom {
@@ -115,17 +120,17 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+  background: rgba(0, 0, 0, 0.7);
   padding: 10px;
   text-align: center;
-  opacity: 0; /* Start hidden */
-  visibility: hidden; /* Hide from layout */
+  opacity: 0;
+  visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .movieItems:hover .movieInfo {
-  opacity: 1; /* Show on hover */
-  visibility: visible; /* Make visible on hover */
+  opacity: 1;
+  visibility: visible;
 }
 
 .movieTitle {

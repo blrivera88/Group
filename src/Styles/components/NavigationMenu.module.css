@@ -1,11 +1,10 @@
 /* Styles/components/NavigationMenu.module.css */
 .navbar {
-  background-color: #1a1a1a;
+  background-color: var(--background-color);
   padding: 15px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 2px solid #333;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
   position: fixed;
   width: 100%;
@@ -30,8 +29,8 @@
 
 .navbar a:hover,
 .navbar button:hover {
-  background-color: #444;
-  color: var(--primary-color);
+  background-color: var(--primary-color);
+  color: var(--text-color); /* Ensure text color changes accordingly */
   border-radius: 25px;
 }
 
@@ -59,7 +58,9 @@
 }
 
 .navbar .loginButton:hover {
-  background-color: #c0392b;
+  background-color: var(
+    --primary-color-hover
+  ); /* Updated for variable-based hover */
 }
 
 .navbar .userName {
@@ -74,4 +75,20 @@
   color: var(--primary-color);
   margin-left: 20px;
   font-size: 14px;
+}
+
+/* New Theme Toggle Button */
+.navbar .themeToggle {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 18px;
+  cursor: pointer;
+  margin-left: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.navbar .themeToggle:hover {
+  background-color: var(--primary-color-hover);
 }
