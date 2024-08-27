@@ -8,9 +8,7 @@
   font-family: var(--font-family);
 }
 
-/* Hero Section */
 .heroSection {
-  background-image: url("D:\college\university-of-arizon\classes\18_INT499_CapstoneForIT\groupAssignments\Group\public\images\denise-jans-mxhWy1td-BE-unsplash.jpg");
   background-size: cover;
   background-position: center;
   padding: 100px 0;

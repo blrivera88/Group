@@ -5,7 +5,12 @@ function About() {
   return (
     <div className={styles.aboutContainer}>
       {/* Hero Section */}
-      <section className={styles.heroSection}>
+      <section
+        className={styles.heroSection}
+        style={{
+          backgroundImage: `url(${process.env.PUBLIC_URL}/images/denise-jans-mxhWy1td-BE-unsplash.jpg)`,
+        }}
+      >
         <div className={styles.heroContent}>
           <h1 className={styles.heroTitle}>About Our Project</h1>
           <p className={styles.heroSubtitle}>
